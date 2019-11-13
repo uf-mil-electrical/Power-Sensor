@@ -40,7 +40,6 @@
 #include "stm32f0xx_hal.h"
 #include <math.h>
 
-
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
@@ -61,7 +60,7 @@ TIM_HandleTypeDef htim2;
 #define FiltMaskIdHigh 0x0000 //specifying which bits of the identifier
 #define FiltMaskIdLow 0xFFFF  //are handled as �must match� (1) or as �don�t care� (0).
 #define RESISTOR1 698000.0f
-#define RESISTOR2 100000.0f
+#define RESISTOR2_V1 100000.0f
 #define RESISTOR2_V2 063400.0f
 #define AdcMax 4095.0f
 #define Vref 3.3f
@@ -108,8 +107,6 @@ int main(void) {
 	/* MCU Configuration----------------------------------------------------------*/
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-
-
 
 	HAL_Init();
 
@@ -376,23 +373,26 @@ void GetVoltageCurrent() {
 	}
 	HAL_ADC_Stop(&hadc);
 
-	BatteryMonitor.Current.Diagnostic /= (float) LpfTaps;
-	asm(" nop");
-	//	BatteryMonitor.Current.Diagnostic = ((BatteryMonitor.Current.Diagnostic) / AdcMax) * Vref;
-//BatteryMonitor.Current.Diagnostic = 28.21f*BatteryMonitor.Current.Diagnostic-0.2195f;
-
 	BatteryMonitor.Voltage.Diagnostic /= (float) LpfTaps;
-	BatteryMonitor.Voltage.Diagnostic = ((BatteryMonitor.Voltage.Diagnostic) / AdcMax) * Vref; //Vres_ref !=
-	BatteryMonitor.Voltage.Diagnostic = ((RESISTOR1 + RESISTOR2_V2) / (RESISTOR2_V2)) * (BatteryMonitor.Voltage.Diagnostic);
-//	if (BatteryMonitor.Current.Diagnostic < 0.019f)
-//	{
-//		BatteryMonitor.Current.Diagnostic = 0;//BatteryMonitor.Current.Diagnostic*15970.0f-315.7f;
-//	}
-//	else
-//	{
-//		BatteryMonitor.Current.Diagnostic = BatteryMonitor.Current.Diagnostic*209.2f+0.27762;
-//	}
-	BatteryMonitor.Current.Diagnostic = 0.1505f*(BatteryMonitor.Current.Diagnostic)- 0.01677f + 0.10f;
+	BatteryMonitor.Voltage.Diagnostic = ((BatteryMonitor.Voltage.Diagnostic)
+			/ AdcMax) * Vref; //Vres_ref !=
+	BatteryMonitor.Voltage.Diagnostic = ((RESISTOR1 + RESISTOR2_V1)
+			/ (RESISTOR2_V1)) * (BatteryMonitor.Voltage.Diagnostic);
+
+	BatteryMonitor.Current.Diagnostic /= (float) LpfTaps;
+	if (BatteryMonitor.Current.Diagnostic < 30.0f) {
+//		BatteryMonitor.Current.Diagnostic = 0.07653f
+//				* (BatteryMonitor.Current.Diagnostic) - 1.813f;
+		//Values in this range are not accurate or precise enough so output is discrete 0
+		BatteryMonitor.Current.Diagnostic = 0;
+		asm(" nop");
+	} else {
+//		BatteryMonitor.Current.Diagnostic = 0.01595f
+//				* (BatteryMonitor.Current.Diagnostic) - 0.04889f + 0.08f;
+		BatteryMonitor.Current.Diagnostic = 0.01604f
+				* (BatteryMonitor.Current.Diagnostic) + 0.02f;
+		asm(" nop");
+	}
 	asm(" nop");
 }
 
