@@ -9760,21 +9760,21 @@ int main(void) {
 
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
- 8003832:	f000 f9ab 	bl	8003b8c <MX_GPIO_Init>
+ 8003832:	f000 f9ad 	bl	8003b90 <MX_GPIO_Init>
 	MX_ADC_Init();
  8003836:	f000 f891 	bl	800395c <MX_ADC_Init>
 	MX_TIM2_Init();
- 800383a:	f000 f937 	bl	8003aac <MX_TIM2_Init>
+ 800383a:	f000 f939 	bl	8003ab0 <MX_TIM2_Init>
 	MX_CAN_Init();
  800383e:	f000 f8f9 	bl	8003a34 <MX_CAN_Init>
 	/* USER CODE BEGIN 2 */
 	InitBattery();
  8003842:	f000 fa29 	bl	8003c98 <InitBattery>
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
-	while (1) {
-		/* USER CODE END WHILE */
-		/* USER CODE BEGIN 3 */
+//		}
+//		while (1) {
+//			HAL_CAN_Transmit(&hcan, 10);
+//		}
+
 		if (TimerIntFlag == 1) {
  8003846:	4b18      	ldr	r3, [pc, #96]	; (80038a8 <main+0x84>)
  8003848:	681b      	ldr	r3, [r3, #0]
@@ -9825,9 +9825,9 @@ int main(void) {
  8003896:	2b03      	cmp	r3, #3
  8003898:	dde2      	ble.n	8003860 <main+0x3c>
 			}
-			HAL_CAN_Transmit(&hcan, 30);
+			HAL_CAN_Transmit(&hcan, 10);
  800389a:	4b05      	ldr	r3, [pc, #20]	; (80038b0 <main+0x8c>)
- 800389c:	211e      	movs	r1, #30
+ 800389c:	210a      	movs	r1, #10
  800389e:	0018      	movs	r0, r3
  80038a0:	f7fe f9ec 	bl	8001c7c <HAL_CAN_Transmit>
 		if (TimerIntFlag == 1) {
@@ -9881,7 +9881,7 @@ void SystemClock_Config(void) {
  80038e6:	d004      	beq.n	80038f2 <SystemClock_Config+0x3e>
 		_Error_Handler(__FILE__, __LINE__);
  80038e8:	4b1b      	ldr	r3, [pc, #108]	; (8003958 <SystemClock_Config+0xa4>)
- 80038ea:	21a9      	movs	r1, #169	; 0xa9
+ 80038ea:	21b2      	movs	r1, #178	; 0xb2
  80038ec:	0018      	movs	r0, r3
  80038ee:	f000 faaf 	bl	8003e50 <_Error_Handler>
 	}
@@ -9915,7 +9915,7 @@ void SystemClock_Config(void) {
  8003916:	d004      	beq.n	8003922 <SystemClock_Config+0x6e>
 		_Error_Handler(__FILE__, __LINE__);
  8003918:	4b0f      	ldr	r3, [pc, #60]	; (8003958 <SystemClock_Config+0xa4>)
- 800391a:	21b5      	movs	r1, #181	; 0xb5
+ 800391a:	21be      	movs	r1, #190	; 0xbe
  800391c:	0018      	movs	r0, r3
  800391e:	f000 fa97 	bl	8003e50 <_Error_Handler>
 	}
@@ -10033,7 +10033,7 @@ static void MX_ADC_Init(void) {
  80039c4:	d004      	beq.n	80039d0 <MX_ADC_Init+0x74>
 		_Error_Handler(__FILE__, __LINE__);
  80039c6:	4b1a      	ldr	r3, [pc, #104]	; (8003a30 <MX_ADC_Init+0xd4>)
- 80039c8:	21da      	movs	r1, #218	; 0xda
+ 80039c8:	21e3      	movs	r1, #227	; 0xe3
  80039ca:	0018      	movs	r0, r3
  80039cc:	f000 fa40 	bl	8003e50 <_Error_Handler>
 	}
@@ -10063,7 +10063,7 @@ static void MX_ADC_Init(void) {
  80039f2:	d004      	beq.n	80039fe <MX_ADC_Init+0xa2>
 		_Error_Handler(__FILE__, __LINE__);
  80039f4:	4b0e      	ldr	r3, [pc, #56]	; (8003a30 <MX_ADC_Init+0xd4>)
- 80039f6:	21e3      	movs	r1, #227	; 0xe3
+ 80039f6:	21ec      	movs	r1, #236	; 0xec
  80039f8:	0018      	movs	r0, r3
  80039fa:	f000 fa29 	bl	8003e50 <_Error_Handler>
 	}
@@ -10084,7 +10084,7 @@ static void MX_ADC_Init(void) {
  8003a12:	d004      	beq.n	8003a1e <MX_ADC_Init+0xc2>
 		_Error_Handler(__FILE__, __LINE__);
  8003a14:	4b06      	ldr	r3, [pc, #24]	; (8003a30 <MX_ADC_Init+0xd4>)
- 8003a16:	21ea      	movs	r1, #234	; 0xea
+ 8003a16:	21f3      	movs	r1, #243	; 0xf3
  8003a18:	0018      	movs	r0, r3
  8003a1a:	f000 fa19 	bl	8003e50 <_Error_Handler>
 	}
@@ -10107,394 +10107,394 @@ static void MX_CAN_Init(void) {
  8003a36:	af00      	add	r7, sp, #0
 
 	hcan.Instance = CAN;
- 8003a38:	4b19      	ldr	r3, [pc, #100]	; (8003aa0 <MX_CAN_Init+0x6c>)
- 8003a3a:	4a1a      	ldr	r2, [pc, #104]	; (8003aa4 <MX_CAN_Init+0x70>)
+ 8003a38:	4b1a      	ldr	r3, [pc, #104]	; (8003aa4 <MX_CAN_Init+0x70>)
+ 8003a3a:	4a1b      	ldr	r2, [pc, #108]	; (8003aa8 <MX_CAN_Init+0x74>)
  8003a3c:	601a      	str	r2, [r3, #0]
-	hcan.Init.Prescaler = 10;
- 8003a3e:	4b18      	ldr	r3, [pc, #96]	; (8003aa0 <MX_CAN_Init+0x6c>)
- 8003a40:	220a      	movs	r2, #10
+	hcan.Init.Prescaler = 5;
+ 8003a3e:	4b19      	ldr	r3, [pc, #100]	; (8003aa4 <MX_CAN_Init+0x70>)
+ 8003a40:	2205      	movs	r2, #5
  8003a42:	605a      	str	r2, [r3, #4]
 	hcan.Init.Mode = CAN_MODE_NORMAL;
- 8003a44:	4b16      	ldr	r3, [pc, #88]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a44:	4b17      	ldr	r3, [pc, #92]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a46:	2200      	movs	r2, #0
  8003a48:	609a      	str	r2, [r3, #8]
 	hcan.Init.SJW = CAN_SJW_1TQ;
- 8003a4a:	4b15      	ldr	r3, [pc, #84]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a4a:	4b16      	ldr	r3, [pc, #88]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a4c:	2200      	movs	r2, #0
  8003a4e:	60da      	str	r2, [r3, #12]
 	hcan.Init.BS1 = CAN_BS1_6TQ;
- 8003a50:	4b13      	ldr	r3, [pc, #76]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a50:	4b14      	ldr	r3, [pc, #80]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a52:	22a0      	movs	r2, #160	; 0xa0
  8003a54:	02d2      	lsls	r2, r2, #11
  8003a56:	611a      	str	r2, [r3, #16]
 	hcan.Init.BS2 = CAN_BS2_1TQ;
- 8003a58:	4b11      	ldr	r3, [pc, #68]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a58:	4b12      	ldr	r3, [pc, #72]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a5a:	2200      	movs	r2, #0
  8003a5c:	615a      	str	r2, [r3, #20]
 	hcan.Init.TTCM = DISABLE;
- 8003a5e:	4b10      	ldr	r3, [pc, #64]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a5e:	4b11      	ldr	r3, [pc, #68]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a60:	2200      	movs	r2, #0
  8003a62:	619a      	str	r2, [r3, #24]
 	hcan.Init.ABOM = DISABLE;
- 8003a64:	4b0e      	ldr	r3, [pc, #56]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a64:	4b0f      	ldr	r3, [pc, #60]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a66:	2200      	movs	r2, #0
  8003a68:	61da      	str	r2, [r3, #28]
 	hcan.Init.AWUM = DISABLE;
- 8003a6a:	4b0d      	ldr	r3, [pc, #52]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a6a:	4b0e      	ldr	r3, [pc, #56]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a6c:	2200      	movs	r2, #0
  8003a6e:	621a      	str	r2, [r3, #32]
 	hcan.Init.NART = DISABLE;
- 8003a70:	4b0b      	ldr	r3, [pc, #44]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a70:	4b0c      	ldr	r3, [pc, #48]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a72:	2200      	movs	r2, #0
  8003a74:	625a      	str	r2, [r3, #36]	; 0x24
 	hcan.Init.RFLM = DISABLE;
- 8003a76:	4b0a      	ldr	r3, [pc, #40]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a76:	4b0b      	ldr	r3, [pc, #44]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a78:	2200      	movs	r2, #0
  8003a7a:	629a      	str	r2, [r3, #40]	; 0x28
 	hcan.Init.TXFP = DISABLE;
- 8003a7c:	4b08      	ldr	r3, [pc, #32]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a7c:	4b09      	ldr	r3, [pc, #36]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a7e:	2200      	movs	r2, #0
  8003a80:	62da      	str	r2, [r3, #44]	; 0x2c
 	if (HAL_CAN_Init(&hcan) != HAL_OK) {
- 8003a82:	4b07      	ldr	r3, [pc, #28]	; (8003aa0 <MX_CAN_Init+0x6c>)
+ 8003a82:	4b08      	ldr	r3, [pc, #32]	; (8003aa4 <MX_CAN_Init+0x70>)
  8003a84:	0018      	movs	r0, r3
  8003a86:	f7fd fee3 	bl	8001850 <HAL_CAN_Init>
  8003a8a:	1e03      	subs	r3, r0, #0
- 8003a8c:	d004      	beq.n	8003a98 <MX_CAN_Init+0x64>
+ 8003a8c:	d006      	beq.n	8003a9c <MX_CAN_Init+0x68>
 		_Error_Handler(__FILE__, __LINE__);
- 8003a8e:	4b06      	ldr	r3, [pc, #24]	; (8003aa8 <MX_CAN_Init+0x74>)
- 8003a90:	21ff      	movs	r1, #255	; 0xff
- 8003a92:	0018      	movs	r0, r3
- 8003a94:	f000 f9dc 	bl	8003e50 <_Error_Handler>
+ 8003a8e:	2384      	movs	r3, #132	; 0x84
+ 8003a90:	005a      	lsls	r2, r3, #1
+ 8003a92:	4b06      	ldr	r3, [pc, #24]	; (8003aac <MX_CAN_Init+0x78>)
+ 8003a94:	0011      	movs	r1, r2
+ 8003a96:	0018      	movs	r0, r3
+ 8003a98:	f000 f9da 	bl	8003e50 <_Error_Handler>
 	}
 
 }
- 8003a98:	46c0      	nop			; (mov r8, r8)
- 8003a9a:	46bd      	mov	sp, r7
- 8003a9c:	bd80      	pop	{r7, pc}
- 8003a9e:	46c0      	nop			; (mov r8, r8)
- 8003aa0:	20000028 	.word	0x20000028
- 8003aa4:	40006400 	.word	0x40006400
- 8003aa8:	08004190 	.word	0x08004190
+ 8003a9c:	46c0      	nop			; (mov r8, r8)
+ 8003a9e:	46bd      	mov	sp, r7
+ 8003aa0:	bd80      	pop	{r7, pc}
+ 8003aa2:	46c0      	nop			; (mov r8, r8)
+ 8003aa4:	20000028 	.word	0x20000028
+ 8003aa8:	40006400 	.word	0x40006400
+ 8003aac:	08004190 	.word	0x08004190
 
-08003aac <MX_TIM2_Init>:
+08003ab0 <MX_TIM2_Init>:
 
 /* TIM2 init function */
 static void MX_TIM2_Init(void) {
- 8003aac:	b580      	push	{r7, lr}
- 8003aae:	b08c      	sub	sp, #48	; 0x30
- 8003ab0:	af00      	add	r7, sp, #0
+ 8003ab0:	b580      	push	{r7, lr}
+ 8003ab2:	b08c      	sub	sp, #48	; 0x30
+ 8003ab4:	af00      	add	r7, sp, #0
 
 	TIM_ClockConfigTypeDef sClockSourceConfig;
 	TIM_SlaveConfigTypeDef sSlaveConfig;
 	TIM_MasterConfigTypeDef sMasterConfig;
 
 	htim2.Instance = TIM2;
- 8003ab2:	4b34      	ldr	r3, [pc, #208]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003ab4:	2280      	movs	r2, #128	; 0x80
- 8003ab6:	05d2      	lsls	r2, r2, #23
- 8003ab8:	601a      	str	r2, [r3, #0]
+ 8003ab6:	4b34      	ldr	r3, [pc, #208]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003ab8:	2280      	movs	r2, #128	; 0x80
+ 8003aba:	05d2      	lsls	r2, r2, #23
+ 8003abc:	601a      	str	r2, [r3, #0]
 	htim2.Init.Prescaler = 128;
- 8003aba:	4b32      	ldr	r3, [pc, #200]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003abc:	2280      	movs	r2, #128	; 0x80
- 8003abe:	605a      	str	r2, [r3, #4]
+ 8003abe:	4b32      	ldr	r3, [pc, #200]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003ac0:	2280      	movs	r2, #128	; 0x80
+ 8003ac2:	605a      	str	r2, [r3, #4]
 	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
- 8003ac0:	4b30      	ldr	r3, [pc, #192]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003ac2:	2200      	movs	r2, #0
- 8003ac4:	609a      	str	r2, [r3, #8]
+ 8003ac4:	4b30      	ldr	r3, [pc, #192]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003ac6:	2200      	movs	r2, #0
+ 8003ac8:	609a      	str	r2, [r3, #8]
 	htim2.Init.Period = 65536;
- 8003ac6:	4b2f      	ldr	r3, [pc, #188]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003ac8:	2280      	movs	r2, #128	; 0x80
- 8003aca:	0252      	lsls	r2, r2, #9
- 8003acc:	60da      	str	r2, [r3, #12]
+ 8003aca:	4b2f      	ldr	r3, [pc, #188]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003acc:	2280      	movs	r2, #128	; 0x80
+ 8003ace:	0252      	lsls	r2, r2, #9
+ 8003ad0:	60da      	str	r2, [r3, #12]
 	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
- 8003ace:	4b2d      	ldr	r3, [pc, #180]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003ad0:	2200      	movs	r2, #0
- 8003ad2:	611a      	str	r2, [r3, #16]
+ 8003ad2:	4b2d      	ldr	r3, [pc, #180]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003ad4:	2200      	movs	r2, #0
+ 8003ad6:	611a      	str	r2, [r3, #16]
 	htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
- 8003ad4:	4b2b      	ldr	r3, [pc, #172]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003ad6:	2200      	movs	r2, #0
- 8003ad8:	619a      	str	r2, [r3, #24]
+ 8003ad8:	4b2b      	ldr	r3, [pc, #172]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003ada:	2200      	movs	r2, #0
+ 8003adc:	619a      	str	r2, [r3, #24]
 	if (HAL_TIM_Base_Init(&htim2) != HAL_OK) {
- 8003ada:	4b2a      	ldr	r3, [pc, #168]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003adc:	0018      	movs	r0, r3
- 8003ade:	f7ff f9f9 	bl	8002ed4 <HAL_TIM_Base_Init>
- 8003ae2:	1e03      	subs	r3, r0, #0
- 8003ae4:	d006      	beq.n	8003af4 <MX_TIM2_Init+0x48>
+ 8003ade:	4b2a      	ldr	r3, [pc, #168]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003ae0:	0018      	movs	r0, r3
+ 8003ae2:	f7ff f9f7 	bl	8002ed4 <HAL_TIM_Base_Init>
+ 8003ae6:	1e03      	subs	r3, r0, #0
+ 8003ae8:	d007      	beq.n	8003afa <MX_TIM2_Init+0x4a>
 		_Error_Handler(__FILE__, __LINE__);
- 8003ae6:	2389      	movs	r3, #137	; 0x89
- 8003ae8:	005a      	lsls	r2, r3, #1
- 8003aea:	4b27      	ldr	r3, [pc, #156]	; (8003b88 <MX_TIM2_Init+0xdc>)
- 8003aec:	0011      	movs	r1, r2
- 8003aee:	0018      	movs	r0, r3
- 8003af0:	f000 f9ae 	bl	8003e50 <_Error_Handler>
+ 8003aea:	231c      	movs	r3, #28
+ 8003aec:	33ff      	adds	r3, #255	; 0xff
+ 8003aee:	001a      	movs	r2, r3
+ 8003af0:	4b26      	ldr	r3, [pc, #152]	; (8003b8c <MX_TIM2_Init+0xdc>)
+ 8003af2:	0011      	movs	r1, r2
+ 8003af4:	0018      	movs	r0, r3
+ 8003af6:	f000 f9ab 	bl	8003e50 <_Error_Handler>
 	}
 
 	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
- 8003af4:	2320      	movs	r3, #32
- 8003af6:	18fb      	adds	r3, r7, r3
- 8003af8:	2280      	movs	r2, #128	; 0x80
- 8003afa:	0152      	lsls	r2, r2, #5
- 8003afc:	601a      	str	r2, [r3, #0]
+ 8003afa:	2320      	movs	r3, #32
+ 8003afc:	18fb      	adds	r3, r7, r3
+ 8003afe:	2280      	movs	r2, #128	; 0x80
+ 8003b00:	0152      	lsls	r2, r2, #5
+ 8003b02:	601a      	str	r2, [r3, #0]
 	if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK) {
- 8003afe:	2320      	movs	r3, #32
- 8003b00:	18fa      	adds	r2, r7, r3
- 8003b02:	4b20      	ldr	r3, [pc, #128]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003b04:	0011      	movs	r1, r2
- 8003b06:	0018      	movs	r0, r3
- 8003b08:	f7ff fb40 	bl	800318c <HAL_TIM_ConfigClockSource>
- 8003b0c:	1e03      	subs	r3, r0, #0
- 8003b0e:	d007      	beq.n	8003b20 <MX_TIM2_Init+0x74>
+ 8003b04:	2320      	movs	r3, #32
+ 8003b06:	18fa      	adds	r2, r7, r3
+ 8003b08:	4b1f      	ldr	r3, [pc, #124]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003b0a:	0011      	movs	r1, r2
+ 8003b0c:	0018      	movs	r0, r3
+ 8003b0e:	f7ff fb3d 	bl	800318c <HAL_TIM_ConfigClockSource>
+ 8003b12:	1e03      	subs	r3, r0, #0
+ 8003b14:	d006      	beq.n	8003b24 <MX_TIM2_Init+0x74>
 		_Error_Handler(__FILE__, __LINE__);
- 8003b10:	2318      	movs	r3, #24
- 8003b12:	33ff      	adds	r3, #255	; 0xff
- 8003b14:	001a      	movs	r2, r3
- 8003b16:	4b1c      	ldr	r3, [pc, #112]	; (8003b88 <MX_TIM2_Init+0xdc>)
- 8003b18:	0011      	movs	r1, r2
- 8003b1a:	0018      	movs	r0, r3
- 8003b1c:	f000 f998 	bl	8003e50 <_Error_Handler>
+ 8003b16:	2390      	movs	r3, #144	; 0x90
+ 8003b18:	005a      	lsls	r2, r3, #1
+ 8003b1a:	4b1c      	ldr	r3, [pc, #112]	; (8003b8c <MX_TIM2_Init+0xdc>)
+ 8003b1c:	0011      	movs	r1, r2
+ 8003b1e:	0018      	movs	r0, r3
+ 8003b20:	f000 f996 	bl	8003e50 <_Error_Handler>
 	}
 
 	sSlaveConfig.SlaveMode = TIM_SLAVEMODE_DISABLE;
- 8003b20:	230c      	movs	r3, #12
- 8003b22:	18fb      	adds	r3, r7, r3
- 8003b24:	2200      	movs	r2, #0
- 8003b26:	601a      	str	r2, [r3, #0]
+ 8003b24:	230c      	movs	r3, #12
+ 8003b26:	18fb      	adds	r3, r7, r3
+ 8003b28:	2200      	movs	r2, #0
+ 8003b2a:	601a      	str	r2, [r3, #0]
 	sSlaveConfig.InputTrigger = TIM_TS_ITR0;
- 8003b28:	230c      	movs	r3, #12
- 8003b2a:	18fb      	adds	r3, r7, r3
- 8003b2c:	2200      	movs	r2, #0
- 8003b2e:	605a      	str	r2, [r3, #4]
+ 8003b2c:	230c      	movs	r3, #12
+ 8003b2e:	18fb      	adds	r3, r7, r3
+ 8003b30:	2200      	movs	r2, #0
+ 8003b32:	605a      	str	r2, [r3, #4]
 	if (HAL_TIM_SlaveConfigSynchronization(&htim2, &sSlaveConfig) != HAL_OK) {
- 8003b30:	230c      	movs	r3, #12
- 8003b32:	18fa      	adds	r2, r7, r3
- 8003b34:	4b13      	ldr	r3, [pc, #76]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003b36:	0011      	movs	r1, r2
- 8003b38:	0018      	movs	r0, r3
- 8003b3a:	f7ff fc07 	bl	800334c <HAL_TIM_SlaveConfigSynchronization>
- 8003b3e:	1e03      	subs	r3, r0, #0
- 8003b40:	d007      	beq.n	8003b52 <MX_TIM2_Init+0xa6>
+ 8003b34:	230c      	movs	r3, #12
+ 8003b36:	18fa      	adds	r2, r7, r3
+ 8003b38:	4b13      	ldr	r3, [pc, #76]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003b3a:	0011      	movs	r1, r2
+ 8003b3c:	0018      	movs	r0, r3
+ 8003b3e:	f7ff fc05 	bl	800334c <HAL_TIM_SlaveConfigSynchronization>
+ 8003b42:	1e03      	subs	r3, r0, #0
+ 8003b44:	d006      	beq.n	8003b54 <MX_TIM2_Init+0xa4>
 		_Error_Handler(__FILE__, __LINE__);
- 8003b42:	231e      	movs	r3, #30
- 8003b44:	33ff      	adds	r3, #255	; 0xff
- 8003b46:	001a      	movs	r2, r3
- 8003b48:	4b0f      	ldr	r3, [pc, #60]	; (8003b88 <MX_TIM2_Init+0xdc>)
- 8003b4a:	0011      	movs	r1, r2
- 8003b4c:	0018      	movs	r0, r3
- 8003b4e:	f000 f97f 	bl	8003e50 <_Error_Handler>
+ 8003b46:	2393      	movs	r3, #147	; 0x93
+ 8003b48:	005a      	lsls	r2, r3, #1
+ 8003b4a:	4b10      	ldr	r3, [pc, #64]	; (8003b8c <MX_TIM2_Init+0xdc>)
+ 8003b4c:	0011      	movs	r1, r2
+ 8003b4e:	0018      	movs	r0, r3
+ 8003b50:	f000 f97e 	bl	8003e50 <_Error_Handler>
 	}
 
 	sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
- 8003b52:	1d3b      	adds	r3, r7, #4
- 8003b54:	2220      	movs	r2, #32
- 8003b56:	601a      	str	r2, [r3, #0]
+ 8003b54:	1d3b      	adds	r3, r7, #4
+ 8003b56:	2220      	movs	r2, #32
+ 8003b58:	601a      	str	r2, [r3, #0]
 	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
- 8003b58:	1d3b      	adds	r3, r7, #4
- 8003b5a:	2200      	movs	r2, #0
- 8003b5c:	605a      	str	r2, [r3, #4]
+ 8003b5a:	1d3b      	adds	r3, r7, #4
+ 8003b5c:	2200      	movs	r2, #0
+ 8003b5e:	605a      	str	r2, [r3, #4]
 	if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig)
- 8003b5e:	1d3a      	adds	r2, r7, #4
- 8003b60:	4b08      	ldr	r3, [pc, #32]	; (8003b84 <MX_TIM2_Init+0xd8>)
- 8003b62:	0011      	movs	r1, r2
- 8003b64:	0018      	movs	r0, r3
- 8003b66:	f7ff fe09 	bl	800377c <HAL_TIMEx_MasterConfigSynchronization>
- 8003b6a:	1e03      	subs	r3, r0, #0
- 8003b6c:	d006      	beq.n	8003b7c <MX_TIM2_Init+0xd0>
+ 8003b60:	1d3a      	adds	r2, r7, #4
+ 8003b62:	4b09      	ldr	r3, [pc, #36]	; (8003b88 <MX_TIM2_Init+0xd8>)
+ 8003b64:	0011      	movs	r1, r2
+ 8003b66:	0018      	movs	r0, r3
+ 8003b68:	f7ff fe08 	bl	800377c <HAL_TIMEx_MasterConfigSynchronization>
+ 8003b6c:	1e03      	subs	r3, r0, #0
+ 8003b6e:	d007      	beq.n	8003b80 <MX_TIM2_Init+0xd0>
 			!= HAL_OK) {
 		_Error_Handler(__FILE__, __LINE__);
- 8003b6e:	2392      	movs	r3, #146	; 0x92
- 8003b70:	005a      	lsls	r2, r3, #1
- 8003b72:	4b05      	ldr	r3, [pc, #20]	; (8003b88 <MX_TIM2_Init+0xdc>)
- 8003b74:	0011      	movs	r1, r2
- 8003b76:	0018      	movs	r0, r3
- 8003b78:	f000 f96a 	bl	8003e50 <_Error_Handler>
+ 8003b70:	232e      	movs	r3, #46	; 0x2e
+ 8003b72:	33ff      	adds	r3, #255	; 0xff
+ 8003b74:	001a      	movs	r2, r3
+ 8003b76:	4b05      	ldr	r3, [pc, #20]	; (8003b8c <MX_TIM2_Init+0xdc>)
+ 8003b78:	0011      	movs	r1, r2
+ 8003b7a:	0018      	movs	r0, r3
+ 8003b7c:	f000 f968 	bl	8003e50 <_Error_Handler>
 	}
 
 }
- 8003b7c:	46c0      	nop			; (mov r8, r8)
- 8003b7e:	46bd      	mov	sp, r7
- 8003b80:	b00c      	add	sp, #48	; 0x30
- 8003b82:	bd80      	pop	{r7, pc}
- 8003b84:	20000070 	.word	0x20000070
- 8003b88:	08004190 	.word	0x08004190
+ 8003b80:	46c0      	nop			; (mov r8, r8)
+ 8003b82:	46bd      	mov	sp, r7
+ 8003b84:	b00c      	add	sp, #48	; 0x30
+ 8003b86:	bd80      	pop	{r7, pc}
+ 8003b88:	20000070 	.word	0x20000070
+ 8003b8c:	08004190 	.word	0x08004190
 
-08003b8c <MX_GPIO_Init>:
+08003b90 <MX_GPIO_Init>:
 
 /** Pinout Configuration
  */
 static void MX_GPIO_Init(void) {
- 8003b8c:	b580      	push	{r7, lr}
- 8003b8e:	b082      	sub	sp, #8
- 8003b90:	af00      	add	r7, sp, #0
+ 8003b90:	b580      	push	{r7, lr}
+ 8003b92:	b082      	sub	sp, #8
+ 8003b94:	af00      	add	r7, sp, #0
 
 	/* GPIO Ports Clock Enable */
 	__HAL_RCC_GPIOA_CLK_ENABLE()
- 8003b92:	4b10      	ldr	r3, [pc, #64]	; (8003bd4 <MX_GPIO_Init+0x48>)
- 8003b94:	4a0f      	ldr	r2, [pc, #60]	; (8003bd4 <MX_GPIO_Init+0x48>)
- 8003b96:	6952      	ldr	r2, [r2, #20]
- 8003b98:	2180      	movs	r1, #128	; 0x80
- 8003b9a:	0289      	lsls	r1, r1, #10
- 8003b9c:	430a      	orrs	r2, r1
- 8003b9e:	615a      	str	r2, [r3, #20]
- 8003ba0:	4b0c      	ldr	r3, [pc, #48]	; (8003bd4 <MX_GPIO_Init+0x48>)
- 8003ba2:	695a      	ldr	r2, [r3, #20]
- 8003ba4:	2380      	movs	r3, #128	; 0x80
- 8003ba6:	029b      	lsls	r3, r3, #10
- 8003ba8:	4013      	ands	r3, r2
- 8003baa:	607b      	str	r3, [r7, #4]
- 8003bac:	687b      	ldr	r3, [r7, #4]
+ 8003b96:	4b10      	ldr	r3, [pc, #64]	; (8003bd8 <MX_GPIO_Init+0x48>)
+ 8003b98:	4a0f      	ldr	r2, [pc, #60]	; (8003bd8 <MX_GPIO_Init+0x48>)
+ 8003b9a:	6952      	ldr	r2, [r2, #20]
+ 8003b9c:	2180      	movs	r1, #128	; 0x80
+ 8003b9e:	0289      	lsls	r1, r1, #10
+ 8003ba0:	430a      	orrs	r2, r1
+ 8003ba2:	615a      	str	r2, [r3, #20]
+ 8003ba4:	4b0c      	ldr	r3, [pc, #48]	; (8003bd8 <MX_GPIO_Init+0x48>)
+ 8003ba6:	695a      	ldr	r2, [r3, #20]
+ 8003ba8:	2380      	movs	r3, #128	; 0x80
+ 8003baa:	029b      	lsls	r3, r3, #10
+ 8003bac:	4013      	ands	r3, r2
+ 8003bae:	607b      	str	r3, [r7, #4]
+ 8003bb0:	687b      	ldr	r3, [r7, #4]
 	;
 	__HAL_RCC_GPIOB_CLK_ENABLE()
- 8003bae:	4b09      	ldr	r3, [pc, #36]	; (8003bd4 <MX_GPIO_Init+0x48>)
- 8003bb0:	4a08      	ldr	r2, [pc, #32]	; (8003bd4 <MX_GPIO_Init+0x48>)
- 8003bb2:	6952      	ldr	r2, [r2, #20]
- 8003bb4:	2180      	movs	r1, #128	; 0x80
- 8003bb6:	02c9      	lsls	r1, r1, #11
- 8003bb8:	430a      	orrs	r2, r1
- 8003bba:	615a      	str	r2, [r3, #20]
- 8003bbc:	4b05      	ldr	r3, [pc, #20]	; (8003bd4 <MX_GPIO_Init+0x48>)
- 8003bbe:	695a      	ldr	r2, [r3, #20]
- 8003bc0:	2380      	movs	r3, #128	; 0x80
- 8003bc2:	02db      	lsls	r3, r3, #11
- 8003bc4:	4013      	ands	r3, r2
- 8003bc6:	603b      	str	r3, [r7, #0]
- 8003bc8:	683b      	ldr	r3, [r7, #0]
+ 8003bb2:	4b09      	ldr	r3, [pc, #36]	; (8003bd8 <MX_GPIO_Init+0x48>)
+ 8003bb4:	4a08      	ldr	r2, [pc, #32]	; (8003bd8 <MX_GPIO_Init+0x48>)
+ 8003bb6:	6952      	ldr	r2, [r2, #20]
+ 8003bb8:	2180      	movs	r1, #128	; 0x80
+ 8003bba:	02c9      	lsls	r1, r1, #11
+ 8003bbc:	430a      	orrs	r2, r1
+ 8003bbe:	615a      	str	r2, [r3, #20]
+ 8003bc0:	4b05      	ldr	r3, [pc, #20]	; (8003bd8 <MX_GPIO_Init+0x48>)
+ 8003bc2:	695a      	ldr	r2, [r3, #20]
+ 8003bc4:	2380      	movs	r3, #128	; 0x80
+ 8003bc6:	02db      	lsls	r3, r3, #11
+ 8003bc8:	4013      	ands	r3, r2
+ 8003bca:	603b      	str	r3, [r7, #0]
+ 8003bcc:	683b      	ldr	r3, [r7, #0]
 	;
 
 }
- 8003bca:	46c0      	nop			; (mov r8, r8)
- 8003bcc:	46bd      	mov	sp, r7
- 8003bce:	b002      	add	sp, #8
- 8003bd0:	bd80      	pop	{r7, pc}
- 8003bd2:	46c0      	nop			; (mov r8, r8)
- 8003bd4:	40021000 	.word	0x40021000
+ 8003bce:	46c0      	nop			; (mov r8, r8)
+ 8003bd0:	46bd      	mov	sp, r7
+ 8003bd2:	b002      	add	sp, #8
+ 8003bd4:	bd80      	pop	{r7, pc}
+ 8003bd6:	46c0      	nop			; (mov r8, r8)
+ 8003bd8:	40021000 	.word	0x40021000
 
-08003bd8 <CanSetup>:
+08003bdc <CanSetup>:
 
 /* USER CODE BEGIN 4 */
 
 void CanSetup() {
- 8003bd8:	b580      	push	{r7, lr}
- 8003bda:	af00      	add	r7, sp, #0
+ 8003bdc:	b580      	push	{r7, lr}
+ 8003bde:	af00      	add	r7, sp, #0
 	if (DEBUG) {
 		hcan.Instance->MCR = 0x60;
- 8003bdc:	4b29      	ldr	r3, [pc, #164]	; (8003c84 <CanSetup+0xac>)
- 8003bde:	681b      	ldr	r3, [r3, #0]
- 8003be0:	2260      	movs	r2, #96	; 0x60
- 8003be2:	601a      	str	r2, [r3, #0]
+ 8003be0:	4b28      	ldr	r3, [pc, #160]	; (8003c84 <CanSetup+0xa8>)
+ 8003be2:	681b      	ldr	r3, [r3, #0]
+ 8003be4:	2260      	movs	r2, #96	; 0x60
+ 8003be6:	601a      	str	r2, [r3, #0]
 	}
 
 	hcan.pTxMsg = &TxMessage;
- 8003be4:	4b27      	ldr	r3, [pc, #156]	; (8003c84 <CanSetup+0xac>)
- 8003be6:	4a28      	ldr	r2, [pc, #160]	; (8003c88 <CanSetup+0xb0>)
- 8003be8:	631a      	str	r2, [r3, #48]	; 0x30
+ 8003be8:	4b26      	ldr	r3, [pc, #152]	; (8003c84 <CanSetup+0xa8>)
+ 8003bea:	4a27      	ldr	r2, [pc, #156]	; (8003c88 <CanSetup+0xac>)
+ 8003bec:	631a      	str	r2, [r3, #48]	; 0x30
 	hcan.pRxMsg = &RxMessage;
- 8003bea:	4b26      	ldr	r3, [pc, #152]	; (8003c84 <CanSetup+0xac>)
- 8003bec:	4a27      	ldr	r2, [pc, #156]	; (8003c8c <CanSetup+0xb4>)
- 8003bee:	635a      	str	r2, [r3, #52]	; 0x34
+ 8003bee:	4b25      	ldr	r3, [pc, #148]	; (8003c84 <CanSetup+0xa8>)
+ 8003bf0:	4a26      	ldr	r2, [pc, #152]	; (8003c8c <CanSetup+0xb0>)
+ 8003bf2:	635a      	str	r2, [r3, #52]	; 0x34
 
 	/*##-2- Configure the CAN Filter ###########################################*/
 	rxFilter.FilterNumber = 0;
- 8003bf0:	4b27      	ldr	r3, [pc, #156]	; (8003c90 <CanSetup+0xb8>)
- 8003bf2:	2200      	movs	r2, #0
- 8003bf4:	615a      	str	r2, [r3, #20]
+ 8003bf4:	4b26      	ldr	r3, [pc, #152]	; (8003c90 <CanSetup+0xb4>)
+ 8003bf6:	2200      	movs	r2, #0
+ 8003bf8:	615a      	str	r2, [r3, #20]
 	rxFilter.FilterMode = CAN_FILTERMODE_IDMASK;
- 8003bf6:	4b26      	ldr	r3, [pc, #152]	; (8003c90 <CanSetup+0xb8>)
- 8003bf8:	2200      	movs	r2, #0
- 8003bfa:	619a      	str	r2, [r3, #24]
+ 8003bfa:	4b25      	ldr	r3, [pc, #148]	; (8003c90 <CanSetup+0xb4>)
+ 8003bfc:	2200      	movs	r2, #0
+ 8003bfe:	619a      	str	r2, [r3, #24]
 	rxFilter.FilterScale = CAN_FILTERSCALE_32BIT;
- 8003bfc:	4b24      	ldr	r3, [pc, #144]	; (8003c90 <CanSetup+0xb8>)
- 8003bfe:	2201      	movs	r2, #1
- 8003c00:	61da      	str	r2, [r3, #28]
+ 8003c00:	4b23      	ldr	r3, [pc, #140]	; (8003c90 <CanSetup+0xb4>)
+ 8003c02:	2201      	movs	r2, #1
+ 8003c04:	61da      	str	r2, [r3, #28]
 	rxFilter.FilterIdHigh = 0x0000;
- 8003c02:	4b23      	ldr	r3, [pc, #140]	; (8003c90 <CanSetup+0xb8>)
- 8003c04:	2200      	movs	r2, #0
- 8003c06:	601a      	str	r2, [r3, #0]
+ 8003c06:	4b22      	ldr	r3, [pc, #136]	; (8003c90 <CanSetup+0xb4>)
+ 8003c08:	2200      	movs	r2, #0
+ 8003c0a:	601a      	str	r2, [r3, #0]
 	rxFilter.FilterIdLow = CAN_MOTHERBOARD_ID;
- 8003c08:	4b21      	ldr	r3, [pc, #132]	; (8003c90 <CanSetup+0xb8>)
- 8003c0a:	2200      	movs	r2, #0
- 8003c0c:	605a      	str	r2, [r3, #4]
+ 8003c0c:	4b20      	ldr	r3, [pc, #128]	; (8003c90 <CanSetup+0xb4>)
+ 8003c0e:	2200      	movs	r2, #0
+ 8003c10:	605a      	str	r2, [r3, #4]
 	rxFilter.FilterMaskIdHigh = 0x0000;
- 8003c0e:	4b20      	ldr	r3, [pc, #128]	; (8003c90 <CanSetup+0xb8>)
- 8003c10:	2200      	movs	r2, #0
- 8003c12:	609a      	str	r2, [r3, #8]
+ 8003c12:	4b1f      	ldr	r3, [pc, #124]	; (8003c90 <CanSetup+0xb4>)
+ 8003c14:	2200      	movs	r2, #0
+ 8003c16:	609a      	str	r2, [r3, #8]
 	rxFilter.FilterMaskIdLow = 0x0000;
- 8003c14:	4b1e      	ldr	r3, [pc, #120]	; (8003c90 <CanSetup+0xb8>)
- 8003c16:	2200      	movs	r2, #0
- 8003c18:	60da      	str	r2, [r3, #12]
+ 8003c18:	4b1d      	ldr	r3, [pc, #116]	; (8003c90 <CanSetup+0xb4>)
+ 8003c1a:	2200      	movs	r2, #0
+ 8003c1c:	60da      	str	r2, [r3, #12]
 	rxFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
- 8003c1a:	4b1d      	ldr	r3, [pc, #116]	; (8003c90 <CanSetup+0xb8>)
- 8003c1c:	2200      	movs	r2, #0
- 8003c1e:	611a      	str	r2, [r3, #16]
+ 8003c1e:	4b1c      	ldr	r3, [pc, #112]	; (8003c90 <CanSetup+0xb4>)
+ 8003c20:	2200      	movs	r2, #0
+ 8003c22:	611a      	str	r2, [r3, #16]
 	rxFilter.FilterActivation = DISABLE;
- 8003c20:	4b1b      	ldr	r3, [pc, #108]	; (8003c90 <CanSetup+0xb8>)
- 8003c22:	2200      	movs	r2, #0
- 8003c24:	621a      	str	r2, [r3, #32]
+ 8003c24:	4b1a      	ldr	r3, [pc, #104]	; (8003c90 <CanSetup+0xb4>)
+ 8003c26:	2200      	movs	r2, #0
+ 8003c28:	621a      	str	r2, [r3, #32]
 	rxFilter.BankNumber = 14;
- 8003c26:	4b1a      	ldr	r3, [pc, #104]	; (8003c90 <CanSetup+0xb8>)
- 8003c28:	220e      	movs	r2, #14
- 8003c2a:	625a      	str	r2, [r3, #36]	; 0x24
+ 8003c2a:	4b19      	ldr	r3, [pc, #100]	; (8003c90 <CanSetup+0xb4>)
+ 8003c2c:	220e      	movs	r2, #14
+ 8003c2e:	625a      	str	r2, [r3, #36]	; 0x24
 
 	if (HAL_CAN_ConfigFilter(&hcan, &rxFilter) != HAL_OK) {
- 8003c2c:	4a18      	ldr	r2, [pc, #96]	; (8003c90 <CanSetup+0xb8>)
- 8003c2e:	4b15      	ldr	r3, [pc, #84]	; (8003c84 <CanSetup+0xac>)
- 8003c30:	0011      	movs	r1, r2
- 8003c32:	0018      	movs	r0, r3
- 8003c34:	f7fd ff30 	bl	8001a98 <HAL_CAN_ConfigFilter>
- 8003c38:	1e03      	subs	r3, r0, #0
- 8003c3a:	d007      	beq.n	8003c4c <CanSetup+0x74>
+ 8003c30:	4a17      	ldr	r2, [pc, #92]	; (8003c90 <CanSetup+0xb4>)
+ 8003c32:	4b14      	ldr	r3, [pc, #80]	; (8003c84 <CanSetup+0xa8>)
+ 8003c34:	0011      	movs	r1, r2
+ 8003c36:	0018      	movs	r0, r3
+ 8003c38:	f7fd ff2e 	bl	8001a98 <HAL_CAN_ConfigFilter>
+ 8003c3c:	1e03      	subs	r3, r0, #0
+ 8003c3e:	d006      	beq.n	8003c4e <CanSetup+0x72>
 		/* Filter configuration Error */
 		Error_Handler();
- 8003c3c:	234e      	movs	r3, #78	; 0x4e
- 8003c3e:	33ff      	adds	r3, #255	; 0xff
- 8003c40:	001a      	movs	r2, r3
- 8003c42:	4b14      	ldr	r3, [pc, #80]	; (8003c94 <CanSetup+0xbc>)
- 8003c44:	0011      	movs	r1, r2
- 8003c46:	0018      	movs	r0, r3
- 8003c48:	f000 f902 	bl	8003e50 <_Error_Handler>
+ 8003c40:	23ab      	movs	r3, #171	; 0xab
+ 8003c42:	005a      	lsls	r2, r3, #1
+ 8003c44:	4b13      	ldr	r3, [pc, #76]	; (8003c94 <CanSetup+0xb8>)
+ 8003c46:	0011      	movs	r1, r2
+ 8003c48:	0018      	movs	r0, r3
+ 8003c4a:	f000 f901 	bl	8003e50 <_Error_Handler>
 	}
 
 	hcan.pTxMsg->StdId = CAN_TX_ID; /*Specifies the standard identifier. This parameter must be a number between Min_Data
- 8003c4c:	4b0d      	ldr	r3, [pc, #52]	; (8003c84 <CanSetup+0xac>)
- 8003c4e:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8003c50:	2209      	movs	r2, #9
- 8003c52:	601a      	str	r2, [r3, #0]
+ 8003c4e:	4b0d      	ldr	r3, [pc, #52]	; (8003c84 <CanSetup+0xa8>)
+ 8003c50:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8003c52:	2209      	movs	r2, #9
+ 8003c54:	601a      	str	r2, [r3, #0]
 	 = 0 and Max_Data = 0x7FF.*/
 	hcan.pTxMsg->ExtId = 0x00; /*Specifies the extended identifier. This parameter must be a number between
- 8003c54:	4b0b      	ldr	r3, [pc, #44]	; (8003c84 <CanSetup+0xac>)
- 8003c56:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8003c58:	2200      	movs	r2, #0
- 8003c5a:	605a      	str	r2, [r3, #4]
+ 8003c56:	4b0b      	ldr	r3, [pc, #44]	; (8003c84 <CanSetup+0xa8>)
+ 8003c58:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8003c5a:	2200      	movs	r2, #0
+ 8003c5c:	605a      	str	r2, [r3, #4]
 	 Min_Data = 0 and Max_Data = 0x1FFFFFFF.*/
 	hcan.pTxMsg->RTR = CAN_RTR_DATA; /*Specifies the type of identifier for the message that will be transmitted. This parameter
- 8003c5c:	4b09      	ldr	r3, [pc, #36]	; (8003c84 <CanSetup+0xac>)
- 8003c5e:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8003c60:	2200      	movs	r2, #0
- 8003c62:	60da      	str	r2, [r3, #12]
+ 8003c5e:	4b09      	ldr	r3, [pc, #36]	; (8003c84 <CanSetup+0xa8>)
+ 8003c60:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8003c62:	2200      	movs	r2, #0
+ 8003c64:	60da      	str	r2, [r3, #12]
 	 can be a value of CAN_identifier_type*/
 	hcan.pTxMsg->IDE = CAN_ID_STD; /*Specifies the type of frame for the received message. This parameter can be a value
- 8003c64:	4b07      	ldr	r3, [pc, #28]	; (8003c84 <CanSetup+0xac>)
- 8003c66:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8003c68:	2200      	movs	r2, #0
- 8003c6a:	609a      	str	r2, [r3, #8]
+ 8003c66:	4b07      	ldr	r3, [pc, #28]	; (8003c84 <CanSetup+0xa8>)
+ 8003c68:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8003c6a:	2200      	movs	r2, #0
+ 8003c6c:	609a      	str	r2, [r3, #8]
 	 of CAN_remote_transmission_request*/
 	hcan.pTxMsg->DLC = 8; /*Specifies the length of the frame that will be transmitted. This parameter must be a number between
- 8003c6c:	4b05      	ldr	r3, [pc, #20]	; (8003c84 <CanSetup+0xac>)
- 8003c6e:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8003c70:	2208      	movs	r2, #8
- 8003c72:	611a      	str	r2, [r3, #16]
+ 8003c6e:	4b05      	ldr	r3, [pc, #20]	; (8003c84 <CanSetup+0xa8>)
+ 8003c70:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8003c72:	2208      	movs	r2, #8
+ 8003c74:	611a      	str	r2, [r3, #16]
 	 Min_Data = 0 and Max_Data = 8. */
 	hcan.pTxMsg->Data[0] = 0; /*Contains the data to be transmitted. This parameter must be a number between
- 8003c74:	4b03      	ldr	r3, [pc, #12]	; (8003c84 <CanSetup+0xac>)
- 8003c76:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8003c78:	2200      	movs	r2, #0
- 8003c7a:	751a      	strb	r2, [r3, #20]
+ 8003c76:	4b03      	ldr	r3, [pc, #12]	; (8003c84 <CanSetup+0xa8>)
+ 8003c78:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8003c7a:	2200      	movs	r2, #0
+ 8003c7c:	751a      	strb	r2, [r3, #20]
 	 Min_Data = 0 and Max_Data = 0xFF.*/
 }
- 8003c7c:	46c0      	nop			; (mov r8, r8)
- 8003c7e:	46bd      	mov	sp, r7
- 8003c80:	bd80      	pop	{r7, pc}
- 8003c82:	46c0      	nop			; (mov r8, r8)
+ 8003c7e:	46c0      	nop			; (mov r8, r8)
+ 8003c80:	46bd      	mov	sp, r7
+ 8003c82:	bd80      	pop	{r7, pc}
  8003c84:	20000028 	.word	0x20000028
  8003c88:	200000b0 	.word	0x200000b0
  8003c8c:	20000118 	.word	0x20000118
@@ -10507,7 +10507,7 @@ void InitBattery() {
  8003c98:	b580      	push	{r7, lr}
  8003c9a:	af00      	add	r7, sp, #0
 	CanSetup();
- 8003c9c:	f7ff ff9c 	bl	8003bd8 <CanSetup>
+ 8003c9c:	f7ff ff9e 	bl	8003bdc <CanSetup>
 	HAL_ADCEx_Calibration_Start(&hadc);
  8003ca0:	4b06      	ldr	r3, [pc, #24]	; (8003cbc <InitBattery+0x24>)
  8003ca2:	0018      	movs	r0, r3

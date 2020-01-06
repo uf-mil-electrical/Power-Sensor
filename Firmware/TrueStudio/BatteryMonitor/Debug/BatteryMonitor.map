@@ -1236,14 +1236,14 @@ LOAD c:/program files (x86)/atollic/truestudio for stm32 9.2.0/armtools/bin/../l
  .text.MX_ADC_Init
                 0x0800395c       0xd8 Src\main.o
  .text.MX_CAN_Init
-                0x08003a34       0x78 Src\main.o
+                0x08003a34       0x7c Src\main.o
  .text.MX_TIM2_Init
-                0x08003aac       0xe0 Src\main.o
+                0x08003ab0       0xe0 Src\main.o
  .text.MX_GPIO_Init
-                0x08003b8c       0x4c Src\main.o
+                0x08003b90       0x4c Src\main.o
  .text.CanSetup
-                0x08003bd8       0xc0 Src\main.o
-                0x08003bd8                CanSetup
+                0x08003bdc       0xbc Src\main.o
+                0x08003bdc                CanSetup
  .text.InitBattery
                 0x08003c98       0x34 Src\main.o
                 0x08003c98                InitBattery

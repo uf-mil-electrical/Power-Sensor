@@ -136,6 +136,15 @@ int main(void) {
 	while (1) {
 		/* USER CODE END WHILE */
 		/* USER CODE BEGIN 3 */
+//		if (TimerIntFlag == 1) {
+//		for (int i = 0; i < 4; i++) {
+//			hcan.pTxMsg->Data[i] = 0xAA;
+//			hcan.pTxMsg->Data[i + 4] = 0xAA;
+//		}
+//		while (1) {
+//			HAL_CAN_Transmit(&hcan, 10);
+//		}
+
 		if (TimerIntFlag == 1) {
 			TimerIntFlag = 0;
 			BatteryMonitor.GetReadings();
@@ -143,7 +152,7 @@ int main(void) {
 				hcan.pTxMsg->Data[i] = BatteryMonitor.Current.CanData[i];
 				hcan.pTxMsg->Data[i + 4] = BatteryMonitor.Voltage.CanData[i];
 			}
-			HAL_CAN_Transmit(&hcan, 30);
+			HAL_CAN_Transmit(&hcan, 10);
 		}
 	}
 	/* USER CODE END 3 */
@@ -240,7 +249,7 @@ static void MX_ADC_Init(void) {
 static void MX_CAN_Init(void) {
 
 	hcan.Instance = CAN;
-	hcan.Init.Prescaler = 10;
+	hcan.Init.Prescaler = 5;
 	hcan.Init.Mode = CAN_MODE_NORMAL;
 	hcan.Init.SJW = CAN_SJW_1TQ;
 	hcan.Init.BS1 = CAN_BS1_6TQ;
